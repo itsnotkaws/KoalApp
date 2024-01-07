@@ -5,7 +5,7 @@ let users = {
 		avatarURL: 'https://tylermcginnis.com/would-you-rather/sarah.jpg',
 		answers: {
 			'8xf0y6ziyjabvozdd253nd': 'optionOne',
-			'6ni6ok3ym7mf1p33lnez': 'optionTwo', // correction effectuée : ne peut pas être option 1 alors que dans les questions elle a répondue la 2
+			'6ni6ok3ym7mf1p33lnez': 'optionTwo', // correction effectuée : ne peut pas être option 1 alors que dans les questions elle a répondu la 2
 			am8ehyc8byjqgar0jgpub9: 'optionTwo',
 			loxhs1bqm25b708cmbf3g: 'optionTwo'
 		},

@@ -8,16 +8,11 @@ if (!currentUser) {
 const username = document.getElementById('username');
 const avatar = document.getElementById('avatar');
 const logout = document.getElementById('logout');
-const answered = document.getElementById('answered');
-const not_answered = document.getElementById('not-answered');
 const not_answered_text = document.getElementById('not-answered-text');
-const answered_text = document.getElementById('answered-text');
 const polls = document.getElementById('polls');
 
 let notAnsweredHtml = '';
-let answeredHtml = '';
 let notAnsweredCount = 0;
-let answeredCount = 0;
 
 _getUsers().then(async users => {
     const user = Object.values(users).find(user => user.name === currentUser);
