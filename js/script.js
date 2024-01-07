@@ -89,6 +89,18 @@ function getAnsweredQuestions(userId, questions) {
     return answeredQuestions;
 }
 
+answered.onclick = () => {
+    if (answered.classList.contains('answered')) return;
+    else {
+        if (answeredHtml) polls.innerHTML = answeredHtml;
+        else polls.innerHTML = '<h2>Pas de question</h2>';
+        not_answered.classList.add('border-white');
+        not_answered.classList.remove('not-answered');
+        answered.classList.remove('border-white');
+        answered.classList.add('border-solid', 'border-x', 'border-t', 'answered');
+    }
+}
+
 logout.onclick = () => {
     localStorage.removeItem('currentUser');
     window.location.href = '/login.html';
