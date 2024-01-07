@@ -101,6 +101,18 @@ answered.onclick = () => {
     }
 }
 
+not_answered.onclick = () => {
+    if (not_answered.classList.contains('not-answered')) return;
+    else {
+        if (notAnsweredHtml) polls.innerHTML = notAnsweredHtml;
+        else polls.innerHTML = '<h2>Pas de question</h2>';
+        answered.classList.add('border-white');
+        answered.classList.remove('answered');
+        not_answered.classList.remove('border-white');
+        not_answered.classList.add('border-solid', 'border-x', 'border-t', 'not-answered');
+    }
+}
+
 logout.onclick = () => {
     localStorage.removeItem('currentUser');
     window.location.href = '/login.html';
