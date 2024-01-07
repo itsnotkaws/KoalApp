@@ -38,6 +38,28 @@ _getUsers().then(async users => {
             <button id="submit" class="w-full text-sm mt-8 py-2 border-solid border-2 rounded border-[#9f9f9f]">Poser la question</button>
         </footer>
     </section>`;
+    
+        const input1 = document.getElementById('input1');
+        const input2 = document.getElementById('input2');
+        const submit = document.getElementById('submit');
+
+        submit.onclick = async function() {
+            if (!input1.value || !input2.value) return;
+            
+            const previousQuestionsString = localStorage.getItem('questions');
+            let previousQuestions = null;
+            
+            if (previousQuestionsString) {
+            previousQuestions = JSON.parse(previousQuestionsString);
+            }
+            
+            _saveQuestion({ optionOneText: input1.value, optionTwoText: input2.value, author: userId }, previousQuestions);
+
+            const newQuestions = await _getQuestions();
+            localStorage.setItem('questions', JSON.stringify(newQuestions));
+
+            window.location.href = '/';
+        }
     }
 })
 
