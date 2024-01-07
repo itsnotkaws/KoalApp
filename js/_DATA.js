@@ -5,7 +5,7 @@ let users = {
 		avatarURL: 'https://tylermcginnis.com/would-you-rather/sarah.jpg',
 		answers: {
 			'8xf0y6ziyjabvozdd253nd': 'optionOne',
-			'6ni6ok3ym7mf1p33lnez': 'optionOne',
+			'6ni6ok3ym7mf1p33lnez': 'optionTwo', // correction effectuée : ne peut pas être option 1 alors que dans les questions elle a répondue la 2
 			am8ehyc8byjqgar0jgpub9: 'optionTwo',
 			loxhs1bqm25b708cmbf3g: 'optionTwo'
 		},
@@ -28,12 +28,12 @@ let users = {
 		answers: {
 			xj352vofupe1dqz9emx13r: 'optionOne',
 			vthrdm985a262al8qx3do: 'optionTwo',
-			'6ni6ok3ym7mf1p33lnez': 'optionOne'
+			'6ni6ok3ym7mf1p33lnez': 'optionTwo' // correction effectuée : ne peut pas être option 1 alors que dans les questions il a répondu la 2
 		},
 		questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r']
 	}
 };
-
+ 
 let questions = {
 	'8xf0y6ziyjabvozdd253nd': {
 		id: '8xf0y6ziyjabvozdd253nd',
@@ -114,7 +114,7 @@ let questions = {
 		}
 	}
 };
-
+ 
 function generateUID() {
 	return (
 		Math.random()
@@ -125,19 +125,19 @@ function generateUID() {
 			.substring(2, 15)
 	);
 }
-
+ 
 export function _getUsers() {
 	return new Promise((res, rej) => {
 		setTimeout(() => res({ ...users }), 1000);
 	});
 }
-
+ 
 export function _getQuestions() {
 	return new Promise((res, rej) => {
 		setTimeout(() => res({ ...questions }), 1000);
 	});
 }
-
+ 
 function formatQuestion({ optionOneText, optionTwoText, author }) {
 	return {
 		id: generateUID(),
@@ -154,17 +154,18 @@ function formatQuestion({ optionOneText, optionTwoText, author }) {
 	};
 }
 
-export function _saveQuestion(question) {
+export function _saveQuestion(question, previous) {
+	if (!previous) previous = questions;
 	return new Promise((res, rej) => {
 		const authedUser = question.author;
 		const formattedQuestion = formatQuestion(question);
-
+ 
 		setTimeout(() => {
 			questions = {
-				...questions,
+				...previous, 
 				[formattedQuestion.id]: formattedQuestion
 			};
-
+ 
 			users = {
 				...users,
 				[authedUser]: {
@@ -172,13 +173,14 @@ export function _saveQuestion(question) {
 					questions: users[authedUser].questions.concat([formattedQuestion.id])
 				}
 			};
-
+ 
 			res(formattedQuestion);
 		}, 1000);
 	});
 }
 
-export function _saveQuestionAnswer({ authedUser, qid, answer }) {
+export function _saveQuestionAnswer({ authedUser, qid, answer }, previous) {
+	if (!previous) previous = questions;
 	return new Promise((res, rej) => {
 		setTimeout(() => {
 			users = {
@@ -191,18 +193,18 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
 					}
 				}
 			};
-
+ 
 			questions = {
-				...questions,
+				...previous, 
 				[qid]: {
-					...questions[qid],
+					...previous[qid],
 					[answer]: {
-						...questions[qid][answer],
-						votes: questions[qid][answer].votes.concat([authedUser])
+						...previous[qid][answer],
+						votes: previous[qid][answer].votes.concat([authedUser])
 					}
 				}
 			};
-
+ 
 			res();
 		}, 500);
 	});
