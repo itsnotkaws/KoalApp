@@ -46,13 +46,7 @@ _getUsers().then(async users => {
         submit.onclick = async function() {
             if (!input1.value || !input2.value) return;
             
-            const previousQuestionsString = localStorage.getItem('questions');
-            let previousQuestions = null;
-            
-            if (previousQuestionsString) {
-            previousQuestions = JSON.parse(previousQuestionsString);
-            }
-            
+            const previousQuestions = localStorage.getItem('questions') ? JSON.parse(localStorage.getItem('questions')) : null;
             _saveQuestion({ optionOneText: input1.value, optionTwoText: input2.value, author: userId }, previousQuestions);
 
             const newQuestions = await _getQuestions();
