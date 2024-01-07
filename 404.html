@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="koalapp is like a quizz app">
+    <title>KoalApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="text-white w-full h-20 bg-black">
+        <nav class="flex items-center justify-around h-full"> 
+            <ul class="flex items-center h-full">
+                <li onclick="window.location.href = '/'" class="flex items-center p-4 h-full border-solid border-[#4e4e4e] border-x cursor-pointer bg-[#4e4e4e] hover:bg-[#4e4e4e]">
+                    <img class="h-10 mr-3" src="https://cdn.pixabay.com/photo/2021/10/30/14/44/speech-balloon-6754528_960_720.png" alt="icon">
+                    <span class="text-sm">Accueil</span>
+                </li>
+                <li onclick="window.location.href = '/add.html'" class="flex items-center p-4 h-full border-solid border-[#4e4e4e] border-r cursor-pointer hover:bg-[#4e4e4e]">
+                    <span class="text-sm">Nouvelle Question</span>
+                </li>
+                <li onclick="window.location.href = '/leaderboard.html'" class="flex items-center p-4 h-full border-solid border-[#4e4e4e] border-r cursor-pointer hover:bg-[#4e4e4e]">
+                    <span class="text-sm">Classement</span>
+                </li>
+            </ul>
+            <ul class="flex items-center h-full p-4 border-solid border-x border-[#4e4e4e]">
+                <li class="flex items-center gap-2">
+                    <span class="text-sm">Bienvenue, <span id="username" class="text-sm"></span></span>
+                    <img id="avatar" class="h-8 rounded-full" src="" alt="avatar">
+                </li>
+                <li>
+                    <button id="logout" class="ml-8 h-full text-sm">Déconnexion</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="w-full h-full p-12 flex flex-col items-center">
+        <h1 class="text-3xl font-semibold">Page introuvable!</h1>
+        <p class="mt-4">Désolé la page ne peut pas être trouvée.</p>
+    </main>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="js/404.js"></script>
+</body>
+</html>
