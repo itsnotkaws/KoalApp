@@ -66,7 +66,7 @@ _getUsers().then(async users => {
             <h3 class="font-semibold text-lg">${leaderboard[1].user.name}</h3>
             <div class="flex items-center gap-2">
                 <span class="font-semibold text-[#9f9f9f]">Rang</span>
-                <div class="flex items-center justify-center text-xs bg-[#9f9f9f] rounded h-5 w-8">1er</div>
+                <div class="flex items-center justify-center text-xs bg-[#9f9f9f] rounded h-5 w-8">2e</div>
             </div>
             <div class="flex items-center justify-between mt-4">
                 <div>
@@ -90,7 +90,7 @@ _getUsers().then(async users => {
             <h3 class="font-semibold text-lg">${leaderboard[2].user.name}</h3>
             <div class="flex items-center gap-2">
                 <span class="font-semibold text-[#9f9f9f]">Rang</span>
-                <div class="flex items-center justify-center text-xs bg-[#9f9f9f] rounded h-5 w-8">1er</div>
+                <div class="flex items-center justify-center text-xs bg-[#9f9f9f] rounded h-5 w-8">3e</div>
             </div>
             <div class="flex items-center justify-between mt-4">
                 <div>
