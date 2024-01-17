@@ -154,15 +154,14 @@ function formatQuestion({ optionOneText, optionTwoText, author }) {
 	};
 }
 
-export function _saveQuestion(question, previous) {
-	if (!previous) previous = questions;
+export function _saveQuestion(question) {
 	return new Promise((res, rej) => {
 		const authedUser = question.author;
 		const formattedQuestion = formatQuestion(question);
  
 		setTimeout(() => {
 			questions = {
-				...previous, 
+				...questions, 
 				[formattedQuestion.id]: formattedQuestion
 			};
  
@@ -179,8 +178,7 @@ export function _saveQuestion(question, previous) {
 	});
 }
 
-export function _saveQuestionAnswer({ authedUser, qid, answer }, previous) {
-	if (!previous) previous = questions;
+export function _saveQuestionAnswer({ authedUser, qid, answer }) {
 	return new Promise((res, rej) => {
 		setTimeout(() => {
 			users = {
@@ -195,12 +193,12 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }, previous) {
 			};
  
 			questions = {
-				...previous, 
+				...questions, 
 				[qid]: {
-					...previous[qid],
+					...questions[qid],
 					[answer]: {
-						...previous[qid][answer],
-						votes: previous[qid][answer].votes.concat([authedUser])
+						...questions[qid][answer],
+						votes: questions[qid][answer].votes.concat([authedUser])
 					}
 				}
 			};
