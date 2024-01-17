@@ -8,18 +8,15 @@
 
 body {
     font-family: "Poppins", sans-serif;
-    width: 100%;
-    height: 100vh;
-    box-sizing: border-box;
 }
 
 .answered::after {
     content: "";
     background-color: white;
     position: absolute;
-    left: 182.5px;
+    left: 183px;
     bottom: -1px;
-    width: 152px;
+    width: 151px;
     height: 3px;
 }
 
