@@ -42,6 +42,15 @@ function loadContent(page) {
     }
 }
 
+function HashChange() {
+    const hash = window.location.hash;
+    const page = hash.substring(1); 
+
+    loadContent(page);
+}
+
+window.addEventListener("hashchange", HashChange);
+
 loadContent();
 
 app.addEventListener('click', (event) => {
@@ -52,19 +61,19 @@ app.addEventListener('click', (event) => {
     const logout = document.getElementById("logout");
 
     if (navHome && navHome.contains(event.target)) {
-        loadContent();
+        window.location.hash = "";
     } else if (navAdd && navAdd.contains(event.target)) {
-        loadContent("add");
+        window.location.hash = "add"; 
     } else if (navLeaderboard && navLeaderboard.contains(event.target)) {
-        loadContent("leaderboard");
+        window.location.hash = "leaderboard";
     } else if (logout && logout.contains(event.target)) {
         currentUser = null;
-        loadContent();
+        window.location.hash = "";
     } else if (questions && questions.length) {
         for (const question of questions) {
             if (question.contains(event.target)) {
                 const questionId = question.getAttribute('qid');
-                loadContent("question");
+                window.location.hash = "question"; 
                 loadQuestion(questionId).then((questionData) => {
                     app.innerHTML = `${questionPage(currentUser)}<section class="w-full h-[calc(100% - 5rem)] p-12 flex flex-col items-center">${questionData}</section>`;
                     loadQuestionInteraction(questionId);
@@ -72,7 +81,7 @@ app.addEventListener('click', (event) => {
             }
         }
     }
-})
+});
 
 function loadLoginInteractions() {
     const loginButton = document.getElementById("login");
