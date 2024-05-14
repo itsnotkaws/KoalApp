@@ -42,7 +42,23 @@ function loadContent(page) {
     }
 }
 
-loadContent();
+function navigateTo(page) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('page', page);
+    window.history.pushState({ page: page }, '', url);
+    loadContent(page);
+}
+
+window.addEventListener('popstate', (event) => {
+    const page = event.state ? event.state.page : null;
+    loadContent(page);
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    const url = new URL(window.location.href);
+    const page = url.searchParams.get('page') || null;
+    loadContent(page);
+});
 
 app.addEventListener('click', (event) => {
     const navHome = document.getElementById("home");
@@ -52,19 +68,19 @@ app.addEventListener('click', (event) => {
     const logout = document.getElementById("logout");
 
     if (navHome && navHome.contains(event.target)) {
-        loadContent();
+        navigateTo(null);
     } else if (navAdd && navAdd.contains(event.target)) {
-        loadContent("add");
+        navigateTo("add");
     } else if (navLeaderboard && navLeaderboard.contains(event.target)) {
-        loadContent("leaderboard");
+        navigateTo("leaderboard");
     } else if (logout && logout.contains(event.target)) {
         currentUser = null;
-        loadContent();
+        navigateTo(null);
     } else if (questions && questions.length) {
         for (const question of questions) {
             if (question.contains(event.target)) {
                 const questionId = question.getAttribute('qid');
-                loadContent("question");
+                navigateTo("question");
                 loadQuestion(questionId).then((questionData) => {
                     app.innerHTML = `${questionPage(currentUser)}<section class="w-full h-[calc(100% - 5rem)] p-12 flex flex-col items-center">${questionData}</section>`;
                     loadQuestionInteraction(questionId);
@@ -72,7 +88,7 @@ app.addEventListener('click', (event) => {
             }
         }
     }
-})
+});
 
 function loadLoginInteractions() {
     const loginButton = document.getElementById("login");
@@ -88,7 +104,7 @@ function loadLoginInteractions() {
             const selected = dropdown.options[dropdown.options.selectedIndex].text;
             if (selected === "Selectionne un utilisateur") return;
             currentUser = Object.values(users).find((user) => user.name === selected);
-            loadContent();
+            navigateTo(null);
         };
     });
 
